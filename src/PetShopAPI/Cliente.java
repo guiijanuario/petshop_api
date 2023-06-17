@@ -2,6 +2,7 @@ package PetShopAPI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Cliente {
 
@@ -72,18 +73,38 @@ public class Cliente {
 
     public Cliente cadastrarCliente(){
         List<Cliente> listaClientes = Main.DB_CLIENTES;
-        if(this.idade >= 120 || this.nome.equalsIgnoreCase(" ")){
-            System.out.printf("Por favor sua idade não pode ser maior que 120 anos ou seu nome não pode ser ");
-        }
-
-        listaClientes.add(this);
 
         System.out.println("Cliente cadastrado com sucesso!");
-      /*  // Imprimir os elementos da lista
+        listaClientes.add(this);
+
+
+        // Imprimir os elementos da lista
         for (Cliente cliente : listaClientes) {
             System.out.println(cliente);
-        }*/
+        }
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(cpf, cliente.cpf);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cpf);
+    }
+
+    @Override
+    public String toString() {
+        return "\nCódigo do cliente: " + idCliente +
+                "\nNome: " + nome +
+                "\nCPF: " + cpf +
+                "\nSexo: " + sexo +
+                "\nIdade: " + idade +
+                "\nTelefone: " + telefone;
+    }
 }

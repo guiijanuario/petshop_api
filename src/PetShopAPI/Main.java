@@ -14,24 +14,19 @@ public class Main {
         Cliente cliente1 = new Cliente(1517, "João", "100.435.564-45", "Masculino", 56, "44998983402");
         Cliente cliente2 = new Cliente(1518, "Maria", "067.453.765-87", "Feminino", 23, "44984359765");
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("[------------------------------------------------------]");
-        System.out.println("[ Olá seja bem vindo ao sistema de gestão de PET SHOP! ]");
-        System.out.println("[------------------------------------------------------]");
+        DB_CLIENTES.add(cliente0);
+        DB_CLIENTES.add(cliente1);
+        DB_CLIENTES.add(cliente2);
 
-        System.out.println("Escolha uma das opções abaixo:");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\n\n[------------------------------------------------------]\n[ Olá seja bem vindo ao sistema de gestão de PET SHOP! ]\n[------------------------------------------------------]\n\n");
+
+        System.out.println("Escolha uma das opções abaixo:\n");
 
         boolean sair = false;
 
         do {
-
-            System.out.println("[------------------]");
-            System.out.println("[ 1 - Clientes     ]");
-            System.out.println("[ 2 - Serviços     ]");
-            System.out.println("[ 3 - PETs         ]");
-            System.out.println("[ 4 - Funcionários ]");
-            System.out.println("[ X - Sair         ]");
-            System.out.println("[------------------]");
+            System.out.print("[------------------]\n[ 1 - Clientes     ]\n[ 2 - Serviços     ]\n[ 3 - PETs         ]\n[ 4 - Funcionários ]\n[ X - Sair         ]\n[------------------]\n");
 
             String opcao = scanner.nextLine().toLowerCase();
 
@@ -40,28 +35,18 @@ public class Main {
             do {
                 switch (opcao) {
                     case "1": {
-                        System.out.println("[---------------------------------]");
-                        System.out.println("[ 1 - Cadastrar novo cliente      ]");
-                        System.out.println("[ 2 - Consultar cliente pelo nome ]");
-                        System.out.println("[ 3 - Alterar dados do cliente    ]");
-                        System.out.println("[ 4 - Excluir cliente             ]");
-                        System.out.println("[ X - Voltar ao menu anterior     ]");
-                        System.out.println("[---------------------------------]");
+                        System.out.print("\n[------ Área de Clientes ---------]\n[ 1 - Cadastrar novo cliente      ]\n[ 2 - Consultar cliente pelo nome ]\n[ 3 - Alterar dados do cliente    ]\n[ 4 - Excluir cliente             ]\n[ X - Voltar ao menu anterior     ]\n[---------------------------------]\n");
                         String entradaCliente = scanner.nextLine().toLowerCase();
-
 
                         switch (entradaCliente) {
                             case "1":
-
-                                System.out.println("[--------------------------------]");
-                                System.out.println("[ Área de Cadastrar novo cliente ]");
-                                System.out.println("[--------------------------------]");
+                                System.out.print("[--------------------------------]\n[ Área de Cadastrar novo cliente ]\n[--------------------------------]\n");
 
                                 double random = Math.random();
                                 int randomInt = (int) random;
                                 int codigoCliente = randomInt;
 
-                                System.out.print("Digite o nome do cliente: ");
+                                System.out.print("\nDigite o nome do cliente: ");
                                 String nomeCliente = scanner.nextLine();
                                 if (nomeCliente.equalsIgnoreCase(" ")) {
                                     System.out.println("É necessário digitar um nome!");
@@ -69,25 +54,31 @@ public class Main {
 
                                 System.out.print("Digite o seu cpf: Ex.(000.000.000-00) ");
                                 String cpfCliente = scanner.nextLine();
-
+                                for(Cliente cliente : DB_CLIENTES){
+                                    if (cliente.getCpf().equals(cpfCliente)){
+                                        System.out.print("\nEsse CPF já está cadastrado em nosso sistema. ");
+                                        System.out.print("\nDigite novamente o seu cpf: Ex.(000.000.000-00) ");
+                                        cpfCliente = scanner.nextLine();
+                                    }
+                                }
                                 System.out.print("Qual o sexo do cliente: ");
                                 String sexoCliente = scanner.nextLine();
 
                                 System.out.print("Qual a idade do cliente: ");
                                 int idadeCliente = scanner.nextInt();
                                 if (idadeCliente >= 120) {
-                                    System.out.println("Não é possível que você tenho mais de 120 anos, por favor insira a sua idade eral");
+                                    System.out.println("Não é possível que você tenho mais de 120 anos, por favor insira a sua idade real");
+                                    System.out.print("Insira a idade do cliente novamente: ");
+                                    idadeCliente = scanner.nextInt();
                                 }
 
                                 System.out.print("Qual telefone do cliente: ");
-                                String telefoneCliente = scanner.nextLine();
+                                String telefoneCliente = scanner.next();
 
                                 Cliente cliente3 = new Cliente(codigoCliente, nomeCliente, cpfCliente, sexoCliente,
                                         idadeCliente, telefoneCliente);
 
                                 cliente3.cadastrarCliente();
-
-                                System.out.printf(DB_CLIENTES.toString());
 
                                 break;
                             case "2":
