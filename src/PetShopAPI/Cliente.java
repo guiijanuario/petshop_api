@@ -1,6 +1,5 @@
 package PetShopAPI;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,16 +8,16 @@ public class Cliente {
     private int idCliente;
     private String nome;
     private String cpf;
-    private String sexo;
+    private String genero;
     private int idade;
     private String telefone;
 
 
-    public Cliente(int idCliente, String nome,String cpf, String sexo, int idade, String telefone) {
+    public Cliente(int idCliente, String nome,String cpf, String genero, int idade, String telefone) {
         this.idCliente = idCliente;
         this.nome = nome;
         this.cpf = cpf;
-        this.sexo = sexo;
+        this.genero = genero;
         this.idade = idade;
         this.telefone = telefone;
     }
@@ -47,12 +46,12 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public int getIdade() {
@@ -77,6 +76,18 @@ public class Cliente {
         System.out.println("Cliente cadastrado com sucesso!");
         listaClientes.add(this);
 
+        // Imprimir os elementos da lista
+        for (Cliente cliente : listaClientes) {
+            System.out.println(cliente);
+        }
+        return this;
+    }
+
+    public Cliente excluirCliente(){
+        List<Cliente> listaClientes = Main.DB_CLIENTES;
+
+        System.out.println("Cliente excluido com sucesso!");
+        listaClientes.remove(this);
 
         // Imprimir os elementos da lista
         for (Cliente cliente : listaClientes) {
@@ -103,8 +114,13 @@ public class Cliente {
         return "\nCódigo do cliente: " + idCliente +
                 "\nNome: " + nome +
                 "\nCPF: " + cpf +
-                "\nSexo: " + sexo +
+                "\nGênero: " + genero +
                 "\nIdade: " + idade +
                 "\nTelefone: " + telefone;
+    }
+
+
+    public String toString(int idCliente) {
+        return "\nCódigo do cliente: " + idCliente + " - Nome: " + nome;
     }
 }
