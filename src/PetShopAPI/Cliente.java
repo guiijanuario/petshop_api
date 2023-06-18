@@ -1,5 +1,6 @@
 package PetShopAPI;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -83,19 +84,27 @@ public class Cliente {
         return this;
     }
 
-    public Cliente excluirCliente(){
+    public Cliente excluirCliente() {
         List<Cliente> listaClientes = Main.DB_CLIENTES;
+        List<Cliente> newDB_CLIENTES = new ArrayList<>();
 
-        System.out.println("Cliente excluido com sucesso!");
-        listaClientes.remove(this);
-
-        // Imprimir os elementos da lista
         for (Cliente cliente : listaClientes) {
+            if (!cliente.equals(this)) {
+                newDB_CLIENTES.add(cliente);
+            }
+        }
+        Main.DB_CLIENTES = newDB_CLIENTES; // Substitui a lista original pela nova lista
+
+        // Imprimir os elementos restantes da lista
+        for (Cliente cliente : newDB_CLIENTES) {
             System.out.println(cliente);
         }
+
+        System.out.println("\n[-------------------------------]\n  Cliente excluído com sucesso!\n[-------------------------------]");
+
+
         return this;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,6 +112,8 @@ public class Cliente {
         Cliente cliente = (Cliente) o;
         return Objects.equals(cpf, cliente.cpf);
     }
+
+
 
     @Override
     public int hashCode() {

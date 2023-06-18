@@ -198,8 +198,6 @@ public class Main {
                                             System.out.println("Ok, não vamos excluir ele.");
                                         }
 
-                                    } else {
-                                        System.out.println("Não encontrei esse cliente em nosso cadastro");
                                     }
                                 }
                                 break;
